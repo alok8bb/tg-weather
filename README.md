@@ -14,5 +14,5 @@ $ pnpm start
 ```
 
 ## Screenshots 
-![Autocomplete Menu](/assets/Telegram_1.png)
-![Weather Message](/assets/Telegram_2.png)
+<img src="https://raw.githubusercontent.com/alok8bb/tg-weather/main/assets/Telegram_1.png" alt="Autocomplete menu" style="height: 600px; width:449px;"/>
+<img src="https://raw.githubusercontent.com/alok8bb/tg-weather/main/assets/Telegram_2.png" alt="Weather Message" style="height: 600px; width:449px;"/>
