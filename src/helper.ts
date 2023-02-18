@@ -2,6 +2,10 @@ import { Markup } from "telegraf";
 import { InlineQueryResult } from "telegraf/types";
 import { API_BASE } from "./main";
 
+/* TODO: 
+	handle response status errors stuff
+*/
+
 export interface Location {
 	id: string;
 	name: string;

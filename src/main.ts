@@ -30,7 +30,6 @@ bot.on("chosen_inline_result", async (ctx: Context) => {
 		undefined,
 		undefined,
 		ctx.inlineMessageId,
-		// FIXME:
 		res == undefined ? "Something went wrong!" : getFromattedTxt(res),
 		{
 			reply_markup: Markup.inlineKeyboard([
@@ -53,7 +52,7 @@ bot.on("inline_query", async (ctx: Context) => {
 	await ctx.answerInlineQuery(result);
 });
 
-bot.launch();
+bot.launch({ dropPendingUpdates: true });
 console.log("[INFO] Started bot...");
 
 process.once("SIGINT", () => bot.stop("SIGINT"));
