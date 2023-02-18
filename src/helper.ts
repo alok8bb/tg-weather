@@ -1,5 +1,5 @@
 import { Markup } from "telegraf";
-import { InlineQueryResult } from "telegraf/typings/core/types/typegram";
+import { InlineQueryResult } from "telegraf/types";
 import { API_BASE } from "./main";
 
 export interface Location {
@@ -9,6 +9,7 @@ export interface Location {
 	country: string;
 	lat: number;
 	lon: number;
+	localtime: string;
 }
 
 export interface Forecast {
@@ -28,23 +29,33 @@ export interface ForecastResponse {
 		condition: {
 			text: string;
 		};
-		wind_kmph: number;
+		wind_kph: number;
 		feelslike_c: number;
+		cloud: number;
 	};
-	forecast: { forecastday: [Forecast] };
+	forecast: { forecastday: Forecast[] };
 }
 
 export const getForecast = async (location: string) => {
-	return (await fetch(
-		`${API_BASE}/forecast.json?` +
-			new URLSearchParams({
-				key: process.env.WEATHER_API_KEY as string,
-				q: `id:${location}`,
-				days: "7",
-				aqi: "no",
-				alerts: "no",
-			})
-	).then((res) => res.json())) as ForecastResponse;
+	try {
+		return (await fetch(
+			`${API_BASE}/forecast.json?` +
+				new URLSearchParams({
+					key: process.env.WEATHER_API_KEY as string,
+					q: `id:${location}`,
+					days: "7",
+					aqi: "no",
+					alerts: "no",
+				})
+		).then((res) => res.json())) as ForecastResponse;
+	} catch (e) {
+		console.log(e);
+		if (typeof e === "string") {
+			console.log(e);
+		} else if (e instanceof Error) {
+			console.log(e.message);
+		}
+	}
 };
 
 export const getLocations = async (lcn_query: string): Promise<Location[]> => {
