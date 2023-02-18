@@ -24,7 +24,7 @@ export interface Forecast {
 export interface ForecastResponse {
 	location: Location;
 	current: {
-		last_updated: number;
+		last_updated: string;
 		temp_c: number;
 		condition: {
 			text: string;
@@ -73,7 +73,7 @@ export const getLocations = async (lcn_query: string): Promise<Location[]> => {
 	}
 
 	try {
-		const locations: [Location] = JSON.parse(await res.text());
+		const locations: Location[] = JSON.parse(await res.text());
 		return locations;
 	} catch (e) {
 		console.log(e);
@@ -87,27 +87,18 @@ export const getLocations = async (lcn_query: string): Promise<Location[]> => {
 	return [];
 };
 
-/* 
-	FIXME: 
-	- Function name 
-	- Construction of array 
-*/
-export const constructor = (locations: Location[]) => {
-	let response = [];
-
-	for (let location of locations) {
-		console.log(location.id as string);
-		response.push({
+export const getQueryResults = (locations: Location[]) =>
+	locations.map((location): InlineQueryResult => {
+		return {
 			type: "article",
 			id: location.id,
 			title: `${location.name} (${location.lat}, ${location.lon})`,
 			description: `${location.region}, ${location.country}`,
-			input_message_content: { message_text: "Waiting for data..." },
+			input_message_content: {
+				message_text: "☁️ Getting weather info...",
+			},
 			reply_markup: Markup.inlineKeyboard([
-				Markup.button.url("Google it you noob", "https://google.com"),
+				Markup.button.switchToCurrentChat("Other locations", ""),
 			]).reply_markup,
-		} as InlineQueryResult);
-	}
-
-	return response;
-};
+		};
+	});
