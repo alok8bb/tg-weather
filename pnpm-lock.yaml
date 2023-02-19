@@ -10,11 +10,11 @@ specifiers:
 dependencies:
   dotenv: 16.0.3
   telegraf: github.com/telegraf/telegraf/5137c75b249898cfdf35bb1560d649f6a7658e62
-  typescript: 4.9.5
 
 devDependencies:
   '@types/node': 18.14.0
   ts-node-dev: 2.0.0_tncu2ai53lzgmizdedur7lbibe
+  typescript: 4.9.5
 
 packages:
 
@@ -510,6 +510,7 @@ packages:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /v8-compile-cache-lib/3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
